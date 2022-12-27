@@ -47,8 +47,8 @@ public class UniFiProtectThingHandlerFactory extends BaseThingHandlerFactory {
     @Override
     protected @Nullable ThingHandler createHandler(Thing thing) {
         ThingTypeUID thingTypeUID = thing.getThingTypeUID();
-        if (UniFiProtectNvrThingHandler.supportsThingType(thingTypeUID)) {
-            UniFiProtectNvrThingHandler uniFiProtectNvrThingHandler = new UniFiProtectNvrThingHandler((Bridge) thing);
+        if (UniFiProtectBridgeHandler.supportsThingType(thingTypeUID)) {
+            UniFiProtectBridgeHandler uniFiProtectNvrThingHandler = new UniFiProtectBridgeHandler((Bridge) thing);
             registerDeviceDiscoveryService(uniFiProtectNvrThingHandler);
             return uniFiProtectNvrThingHandler;
         } else if (UniFiProtectG4DoorbellThingHandler.supportsThingType(thingTypeUID)) {
@@ -64,13 +64,13 @@ public class UniFiProtectThingHandlerFactory extends BaseThingHandlerFactory {
 
     @Override
     public boolean supportsThingType(ThingTypeUID thingTypeUID) {
-        return UniFiProtectNvrThingHandler.supportsThingType(thingTypeUID)
+        return UniFiProtectBridgeHandler.supportsThingType(thingTypeUID)
                 || UniFiProtectG4CameraThingHandler.supportsThingType(thingTypeUID)
                 || UniFiProtectG4DoorbellThingHandler.supportsThingType(thingTypeUID)
                 || UniFiProtectG3CameraThingHandler.supportsThingType(thingTypeUID);
     }
 
-    private synchronized void registerDeviceDiscoveryService(UniFiProtectNvrThingHandler handler) {
+    private synchronized void registerDeviceDiscoveryService(UniFiProtectBridgeHandler handler) {
         UniFiProtectDiscoveryService discoveryService = new UniFiProtectDiscoveryService(handler);
         discoveryServiceRegs.put(handler.getThing().getUID(),
                 bundleContext.registerService(DiscoveryService.class.getName(), discoveryService, new Hashtable<>()));

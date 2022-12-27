@@ -16,7 +16,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.ContentResponse;
 import org.openhab.binding.unifiprotect.internal.UniFiProtectBindingConstants;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +40,7 @@ public class UniFiProtectLoginRequest extends UniFiProtectRequest {
 
     private final Logger logger = LoggerFactory.getLogger(UniFiProtectLoginRequest.class);
 
-    public UniFiProtectLoginRequest(String token, HttpClient httpClient, UniFiProtectNvrThingConfig config) {
+    public UniFiProtectLoginRequest(String token, HttpClient httpClient, UniFiProtectBridgeConfig config) {
         super(httpClient, config);
         setPath(AUTH_PATH_UNIFI_OS);
         setBodyParameter(USERNAME, config.getUserName());

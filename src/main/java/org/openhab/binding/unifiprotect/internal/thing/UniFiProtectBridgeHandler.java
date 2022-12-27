@@ -58,27 +58,27 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The {@link UniFiProtectNvrThingHandler}
+ * The {@link UniFiProtectBridgeHandler}
  *
  * @author Joseph (Seaside) Hagberg - Initial contribution
  */
 @NonNullByDefault
-public class UniFiProtectNvrThingHandler extends BaseBridgeHandler implements PropertyChangeListener {
+public class UniFiProtectBridgeHandler extends BaseBridgeHandler implements PropertyChangeListener {
 
     private static final long REFRESH_DELAY = 1;
     private @Nullable ScheduledFuture<?> refreshJob;
-    private final Logger logger = LoggerFactory.getLogger(UniFiProtectNvrThingHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(UniFiProtectBridgeHandler.class);
 
     private volatile boolean disposed = false;
     private @Nullable volatile UniFiProtectNvr nvr;
 
-    private UniFiProtectNvrThingConfig config = new UniFiProtectNvrThingConfig();
+    private UniFiProtectBridgeConfig config = new UniFiProtectBridgeConfig();
 
     private @Nullable UniFiProtectEventManager eventManager;
 
     private @Nullable CompletableFuture<Void> refreshFuture = null;
 
-    public UniFiProtectNvrThingHandler(Bridge bridge) {
+    public UniFiProtectBridgeHandler(Bridge bridge) {
         super(bridge);
     }
 
@@ -97,7 +97,7 @@ public class UniFiProtectNvrThingHandler extends BaseBridgeHandler implements Pr
     @Override
     public void initialize() {
         cancelRefreshJob();
-        config = getConfig().as(UniFiProtectNvrThingConfig.class);
+        config = getConfig().as(UniFiProtectBridgeConfig.class);
         logger.debug("Initializing the UniFi Protect NVR Handler with config = {}", config);
         nvr = new UniFiProtectNvr(config);
         boolean initNvr = nvr.init();

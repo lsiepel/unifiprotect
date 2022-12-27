@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.openhab.binding.unifiprotect.internal.model.UniFiProtectCameraCache;
 import org.openhab.binding.unifiprotect.internal.model.UniFiProtectNvr;
 import org.openhab.binding.unifiprotect.internal.model.UniFiProtectStatus;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.Level;
@@ -39,7 +39,7 @@ import ch.qos.logback.classic.Logger;
 public class UniFiProtectBoostrapTest {
     private static final Logger logger = (Logger) LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME);
 
-    private UniFiProtectNvrThingConfig config = new UniFiProtectNvrThingConfig();
+    private UniFiProtectBridgeConfig config = new UniFiProtectBridgeConfig();
 
     private String bootstrap = "";
 
@@ -76,7 +76,7 @@ public class UniFiProtectBoostrapTest {
 
     private class UniFiProtectNvrCustomBootstrap extends UniFiProtectNvr {
 
-        public UniFiProtectNvrCustomBootstrap(UniFiProtectNvrThingConfig config) {
+        public UniFiProtectNvrCustomBootstrap(UniFiProtectBridgeConfig config) {
             super(config);
         }
 

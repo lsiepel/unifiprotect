@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jetty.client.HttpClient;
 import org.openhab.binding.unifiprotect.internal.UniFiProtectUtil;
 import org.openhab.binding.unifiprotect.internal.model.json.UniFiProtectJsonParser;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 import org.openhab.binding.unifiprotect.websocket.UniFiProtectAction;
 import org.openhab.binding.unifiprotect.websocket.UniFiProtectEventWebSocket;
 import org.openhab.binding.unifiprotect.websocket.UniFiProtectEventWsClient;
@@ -45,7 +45,7 @@ public class UniFiProtectEventManager implements PropertyChangeListener {
     private volatile CompletableFuture<Void> reInitializationFuture = null;
 
     public UniFiProtectEventManager(HttpClient httpClient, UniFiProtectJsonParser uniFiProtectJsonParser,
-            UniFiProtectNvrThingConfig config) {
+            UniFiProtectBridgeConfig config) {
         propertyChangeSupport = new PropertyChangeSupport(this);
         wsClient = new UniFiProtectEventWsClient(httpClient, uniFiProtectJsonParser, config);
     }

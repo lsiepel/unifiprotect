@@ -15,7 +15,7 @@ package org.openhab.binding.unifiprotect.internal.model.request;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jetty.client.HttpClient;
 import org.openhab.binding.unifiprotect.internal.UniFiProtectLcdMessage;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 
 /**
  * The {@link UniFiProtectLcdMessageRequest}
@@ -25,7 +25,7 @@ import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfi
 @NonNullByDefault
 public class UniFiProtectLcdMessageRequest extends UniFiProtectRequest {
 
-    public UniFiProtectLcdMessageRequest(HttpClient httpClient, String cameraId, UniFiProtectNvrThingConfig config,
+    public UniFiProtectLcdMessageRequest(HttpClient httpClient, String cameraId, UniFiProtectBridgeConfig config,
             String token, UniFiProtectLcdMessage lcdMessage) {
         super(httpClient, config);
         setPath(API_CAMERAS.concat(cameraId));

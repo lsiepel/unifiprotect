@@ -14,7 +14,7 @@ package org.openhab.binding.unifiprotect.internal.model.request;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jetty.client.HttpClient;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 
 /**
  * The {@link UniFiProtectHeatmapRequest}
@@ -27,7 +27,7 @@ public class UniFiProtectHeatmapRequest extends UniFiProtectRequest {
     private static final String API_HEATMAP = "/proxy/protect/api/heatmaps/";
 
     public UniFiProtectHeatmapRequest(HttpClient httpClient, String token, String heatmap,
-            UniFiProtectNvrThingConfig config) {
+            UniFiProtectBridgeConfig config) {
         super(httpClient, config);
         setPath(API_HEATMAP.concat(heatmap));
         setHeader(UniFiProtectRequest.HEADER_X_CSRF_TOKEN, token);

@@ -20,7 +20,7 @@ import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 import org.openhab.binding.unifiprotect.internal.model.json.UniFiProtectJsonParser;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +39,7 @@ public class UniFiProtectEventWsClient {
     private WebSocketClient client;
 
     public UniFiProtectEventWsClient(HttpClient httpClient, UniFiProtectJsonParser uniFiProtectJsonParser,
-            UniFiProtectNvrThingConfig config) {
+            UniFiProtectBridgeConfig config) {
         uri = WSS.concat(config.getHost()).concat(PROXY_PROTECT_WS_UPDATES);
         this.httpClient = httpClient;
         this.uniFiProtectJsonParser = uniFiProtectJsonParser;

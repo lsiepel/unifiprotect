@@ -12,8 +12,13 @@
  */
 package org.openhab.binding.unifiprotect.internal;
 
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingHandler;
+import org.eclipse.jdt.annotation.Nullable;
+import org.openhab.binding.unifiprotect.internal.model.UniFiProtectNvr;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeHandler;
 import org.openhab.binding.unifiprotect.internal.types.UniFiProtectCamera;
 import org.openhab.core.config.discovery.AbstractDiscoveryService;
 import org.openhab.core.config.discovery.DiscoveryResult;
@@ -37,49 +42,43 @@ public class UniFiProtectDiscoveryService extends AbstractDiscoveryService {
     private static final String UNIFI_PROTECT = "UniFi Protect: ";
 
     private static final int TIMEOUT = 30;
-    private UniFiProtectNvrThingHandler bridge;
+    private static final int REFRESH_SECONDS = 1200;
+    private UniFiProtectBridgeHandler bridgeHandler;
+    private @Nullable ScheduledFuture<?> discoveryFuture;
 
     private final Logger logger = LoggerFactory.getLogger(UniFiProtectDiscoveryService.class);
 
-    public UniFiProtectDiscoveryService(UniFiProtectNvrThingHandler bridge) throws IllegalArgumentException {
+    public UniFiProtectDiscoveryService(UniFiProtectBridgeHandler bridge) throws IllegalArgumentException {
         super(UniFiProtectBindingConstants.SUPPORTED_DEVICE_THING_TYPES_UIDS, TIMEOUT);
-        this.bridge = bridge;
+        this.bridgeHandler = bridge;
         new UniFiProtectScan();
         logger.debug("Initializing UniFiProtect Discovery Nvr: {}", bridge);
         activate(null);
     }
 
-    @SuppressWarnings({ "null", "unused" })
     @Override
     protected void startScan() {
-
-        if (bridge == null) {
-            logger.debug("Can't start scanning for devices, UniFiProtect bridge handler not found!");
-            return;
-        }
-
-        if (!bridge.getThing().getStatus().equals(ThingStatus.ONLINE)) {
+        if (!bridgeHandler.getThing().getStatus().equals(ThingStatus.ONLINE)) {
             logger.debug("Bridge is OFFLINE, can't scan for devices!");
             return;
         }
-
-        if (bridge.getNvr() == null) {
+        UniFiProtectNvr localNVR = bridgeHandler.getNvr();
+        if (localNVR == null) {
             logger.debug("Failed to start discovery scan due to no nvr exists in the bridge");
             return;
         }
 
-        logger.debug("Starting scan of UniFiProtect Server {}", bridge.getThing().getUID());
+        logger.debug("Starting scan of UniFiProtect Server {}", bridgeHandler.getThing().getUID());
 
-        bridge.getNvr().getCameraInsightCache().getCameras()
-                .forEach(camera -> logger.debug("Found Camera: {}", camera));
+        localNVR.getCameraInsightCache().getCameras().forEach(camera -> logger.debug("Found Camera: {}", camera));
 
-        for (Thing thing : bridge.getThing().getThings()) {
+        for (Thing thing : bridgeHandler.getThing().getThings()) {
             if (thing instanceof UniFiProtectCamera) {
                 logger.debug("Found existing camera already!");
             }
         }
-        ThingUID bridgeUid = bridge.getThing().getUID();
-        for (UniFiProtectCamera camera : bridge.getNvr().getCameraInsightCache().getCameras()) {
+        ThingUID bridgeUid = bridgeHandler.getThing().getUID();
+        for (UniFiProtectCamera camera : localNVR.getCameraInsightCache().getCameras()) {
             ThingUID thingUID = new ThingUID(getThingType(camera), bridgeUid, camera.getMac());
 
             DiscoveryResult discoveryResult = DiscoveryResultBuilder.create(thingUID)
@@ -108,7 +107,8 @@ public class UniFiProtectDiscoveryService extends AbstractDiscoveryService {
                 return UniFiProtectBindingConstants.THING_TYPE_G3_CAMERA;
             }
         }
-        logger.error("Faild to identify UnifiProtect camera, assuming g3 type: {}", type);
+        logger.error("Faild to identify UnifiProtect camera, assuming: {} actual type: {}",
+                UniFiProtectBindingConstants.THING_TYPE_G3_CAMERA, type);
         return UniFiProtectBindingConstants.THING_TYPE_G3_CAMERA;
     }
 
@@ -120,12 +120,29 @@ public class UniFiProtectDiscoveryService extends AbstractDiscoveryService {
 
     @Override
     protected void startBackgroundDiscovery() {
-        /* Not Implemented */
+        logger.debug("Start UniFi Protect background discovery");
+
+        ScheduledFuture<?> localDiscoveryFuture = discoveryFuture;
+        if (localDiscoveryFuture == null || localDiscoveryFuture.isCancelled()) {
+            discoveryFuture = scheduler.scheduleWithFixedDelay(this::startScan, 30, REFRESH_SECONDS, TimeUnit.SECONDS);
+        }
     }
 
-    @SuppressWarnings("null")
-    @NonNullByDefault
+    @Override
+    protected void stopBackgroundDiscovery() {
+        logger.debug("Stopping UniFi Protect background discovery");
+
+        ScheduledFuture<?> localDiscoveryFuture = discoveryFuture;
+        if (localDiscoveryFuture != null) {
+            if (!localDiscoveryFuture.isCancelled()) {
+                localDiscoveryFuture.cancel(true);
+                localDiscoveryFuture = null;
+            }
+        }
+    }
+
     public class UniFiProtectScan implements Runnable {
+
         @Override
         public void run() {
             startScan();

@@ -15,7 +15,7 @@ package org.openhab.binding.unifiprotect.internal.model.request;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jetty.client.HttpClient;
 import org.openhab.binding.unifiprotect.internal.UniFiProtectUtil;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 
 /**
  * The {@link UniFiProtectSnapshotRequest}
@@ -32,7 +32,7 @@ public class UniFiProtectSnapshotRequest extends UniFiProtectRequest {
     private static final String TRUE = "true";
 
     public UniFiProtectSnapshotRequest(HttpClient httpClient, String cameraId, String cameraType, String token,
-            UniFiProtectNvrThingConfig config) {
+            UniFiProtectBridgeConfig config) {
         super(httpClient, config);
         setPath(API_CAMERAS.concat(cameraId).concat(SNAPSHOT));
         setHeader(UniFiProtectRequest.HEADER_X_CSRF_TOKEN, token);

@@ -275,7 +275,7 @@ public class UniFiProtectG4CameraThingHandler extends UniFiProtectBaseThingHandl
     public void initialize() {
         Bridge bridge = getBridge();
         if (bridge == null || bridge.getHandler() == null
-                || !(bridge.getHandler() instanceof UniFiProtectNvrThingHandler)) {
+                || !(bridge.getHandler() instanceof UniFiProtectBridgeHandler)) {
             updateStatus(OFFLINE, ThingStatusDetail.CONFIGURATION_ERROR,
                     "You must choose a UniFiProtect NVR for this thing.");
             return;

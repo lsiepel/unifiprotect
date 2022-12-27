@@ -15,7 +15,7 @@ package org.openhab.binding.unifiprotect.internal.model.request;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jetty.client.HttpClient;
 import org.openhab.binding.unifiprotect.internal.UniFiProtectSmartDetectTypes;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 
 /**
  * The {@link UniFiProtectSmartDetectRequest}
@@ -25,7 +25,7 @@ import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfi
 @NonNullByDefault
 public class UniFiProtectSmartDetectRequest extends UniFiProtectRequest {
 
-    public UniFiProtectSmartDetectRequest(HttpClient httpClient, String cameraId, UniFiProtectNvrThingConfig config,
+    public UniFiProtectSmartDetectRequest(HttpClient httpClient, String cameraId, UniFiProtectBridgeConfig config,
             String token, UniFiProtectSmartDetectTypes types) {
         super(httpClient, config);
         setPath(API_CAMERAS.concat(cameraId));

@@ -284,8 +284,8 @@ public class UniFiProtectBaseThingHandler extends BaseThingHandler {
     protected final @Nullable UniFiProtectNvr getNvr() {
         Bridge bridge = getBridge();
         if (bridge != null && bridge.getHandler() != null
-                && (bridge.getHandler() instanceof UniFiProtectNvrThingHandler)) {
-            return ((UniFiProtectNvrThingHandler) bridge.getHandler()).getNvr();
+                && (bridge.getHandler() instanceof UniFiProtectBridgeHandler)) {
+            return ((UniFiProtectBridgeHandler) bridge.getHandler()).getNvr();
         }
         return null;
     }
@@ -294,7 +294,7 @@ public class UniFiProtectBaseThingHandler extends BaseThingHandler {
     public void initialize() {
         Bridge bridge = getBridge();
         if (bridge == null || bridge.getHandler() == null
-                || !(bridge.getHandler() instanceof UniFiProtectNvrThingHandler)) {
+                || !(bridge.getHandler() instanceof UniFiProtectBridgeHandler)) {
             updateStatus(OFFLINE, ThingStatusDetail.CONFIGURATION_ERROR,
                     "You must choose a UniFiProtect NVR for this thing.");
             return;

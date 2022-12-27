@@ -15,7 +15,7 @@ package org.openhab.binding.unifiprotect.internal.model.request;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.http.HttpMethod;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 
 /**
  * The {@link UniFiProtectRebootCameraRequest}
@@ -27,7 +27,7 @@ public class UniFiProtectRebootCameraRequest extends UniFiProtectRequest {
 
     private static final String REBOOT = "/reboot";
 
-    public UniFiProtectRebootCameraRequest(HttpClient httpClient, String cameraId, UniFiProtectNvrThingConfig config,
+    public UniFiProtectRebootCameraRequest(HttpClient httpClient, String cameraId, UniFiProtectBridgeConfig config,
             String token) {
         super(httpClient, config);
         setPath(API_CAMERAS.concat(cameraId).concat(REBOOT));

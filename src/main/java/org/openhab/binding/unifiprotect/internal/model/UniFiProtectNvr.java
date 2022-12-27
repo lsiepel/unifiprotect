@@ -50,7 +50,7 @@ import org.openhab.binding.unifiprotect.internal.model.request.UniFiProtectSnaps
 import org.openhab.binding.unifiprotect.internal.model.request.UniFiProtectStatusLightRequest;
 import org.openhab.binding.unifiprotect.internal.model.request.UniFiProtectThumbnailRequest;
 import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBaseThingConfig;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 import org.openhab.binding.unifiprotect.internal.types.UniFiProtectCamera;
 import org.openhab.binding.unifiprotect.internal.types.UniFiProtectNvrDevice;
 import org.openhab.binding.unifiprotect.internal.types.UniFiProtectNvrUser;
@@ -75,10 +75,10 @@ public class UniFiProtectNvr {
     private final HttpClient httpClient;
     private final Logger logger = LoggerFactory.getLogger(UniFiProtectNvr.class);
 
-    private final UniFiProtectNvrThingConfig config;
+    private final UniFiProtectBridgeConfig config;
     private final UniFiProtectJsonParser uniFiProtectJsonParser;
 
-    public UniFiProtectNvr(UniFiProtectNvrThingConfig config) {
+    public UniFiProtectNvr(UniFiProtectBridgeConfig config) {
         this.config = config;
         httpClient = new HttpClient(new SslContextFactory(true));
         httpClient.setFollowRedirects(false);
@@ -527,7 +527,7 @@ public class UniFiProtectNvr {
         return nvrUser;
     }
 
-    public UniFiProtectNvrThingConfig getConfig() {
+    public UniFiProtectBridgeConfig getConfig() {
         return config;
     }
 

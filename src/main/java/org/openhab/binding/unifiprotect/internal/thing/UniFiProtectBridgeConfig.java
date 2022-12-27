@@ -16,12 +16,12 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 
 /**
- * The {@link UniFiProtectNvrThingConfig}
+ * The {@link UniFiProtectBridgeConfig}
  *
  * @author Joseph (Seaside) Hagberg - Initial contribution
  */
 @NonNullByDefault
-public class UniFiProtectNvrThingConfig {
+public class UniFiProtectBridgeConfig {
 
     private String host = "";
     private String username = "";
@@ -41,7 +41,7 @@ public class UniFiProtectNvrThingConfig {
     public @Nullable String defaultSnapshotWidthAsString;
     public @Nullable String defaultSnapshotHeightAsString;
 
-    public UniFiProtectNvrThingConfig() {
+    public UniFiProtectBridgeConfig() {
         final String tmpDir = System.getProperty(TEMP_DIR_PROPERTY);
         imageFolder = tmpDir == null ? "/tmp" : tmpDir;
         setDefaultSnapshotHeight(defaultSnapshotHeight);

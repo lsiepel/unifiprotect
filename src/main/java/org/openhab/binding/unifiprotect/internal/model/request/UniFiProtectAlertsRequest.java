@@ -14,7 +14,7 @@ package org.openhab.binding.unifiprotect.internal.model.request;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jetty.client.HttpClient;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 
 /**
  * The {@link UniFiProtectAlertsRequest}
@@ -29,7 +29,7 @@ public class UniFiProtectAlertsRequest extends UniFiProtectRequest {
 
     private static final String API_USERS = "/proxy/protect/api/users/";
 
-    public UniFiProtectAlertsRequest(HttpClient httpClient, UniFiProtectNvrThingConfig config, String token,
+    public UniFiProtectAlertsRequest(HttpClient httpClient, UniFiProtectBridgeConfig config, String token,
             String userId, boolean enable) {
         super(httpClient, config);
         setPath(API_USERS.concat(userId));

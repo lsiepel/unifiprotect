@@ -14,7 +14,7 @@ package org.openhab.binding.unifiprotect.internal.model.request;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jetty.client.HttpClient;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 
 /**
  * The {@link UniFiProtectStatusLightRequest}
@@ -27,7 +27,7 @@ public class UniFiProtectStatusLightRequest extends UniFiProtectRequest {
     private static final String JSON_RAW_ENABLED = "{\"ledSettings\": {\"isEnabled\": true }}";
     private static final String JSON_RAW_DISBLED = "{\"ledSettings\": {\"isEnabled\": false }}";
 
-    public UniFiProtectStatusLightRequest(HttpClient httpClient, String cameraId, UniFiProtectNvrThingConfig config,
+    public UniFiProtectStatusLightRequest(HttpClient httpClient, String cameraId, UniFiProtectBridgeConfig config,
             String token, boolean enabled) {
         super(httpClient, config);
         setPath(API_CAMERAS.concat(cameraId));

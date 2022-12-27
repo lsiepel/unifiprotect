@@ -15,7 +15,7 @@ package org.openhab.binding.unifiprotect.internal.model.request;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jetty.client.HttpClient;
 import org.openhab.binding.unifiprotect.internal.UniFiProtectRecordingMode;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 
 /**
  * The {@link UniFiProtectRecordingModeRequest}
@@ -25,7 +25,7 @@ import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfi
 @NonNullByDefault
 public class UniFiProtectRecordingModeRequest extends UniFiProtectRequest {
 
-    public UniFiProtectRecordingModeRequest(HttpClient httpClient, String cameraId, UniFiProtectNvrThingConfig config,
+    public UniFiProtectRecordingModeRequest(HttpClient httpClient, String cameraId, UniFiProtectBridgeConfig config,
             String token, UniFiProtectRecordingMode recordingMode) {
         super(httpClient, config);
         setPath(API_CAMERAS.concat(cameraId));

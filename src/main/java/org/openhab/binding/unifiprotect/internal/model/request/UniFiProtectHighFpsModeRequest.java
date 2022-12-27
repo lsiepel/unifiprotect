@@ -14,7 +14,7 @@ package org.openhab.binding.unifiprotect.internal.model.request;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jetty.client.HttpClient;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 
 /**
  * The {@link UniFiProtectHighFpsModeRequest}
@@ -27,7 +27,7 @@ public class UniFiProtectHighFpsModeRequest extends UniFiProtectRequest {
     private static final String JSON_RAW_ENABLE = "{\"videoMode\": \"highFps\"}";
     private static final String JSON_RAW_DISBLE = "{\"videoMode\": \"default\"}";
 
-    public UniFiProtectHighFpsModeRequest(HttpClient httpClient, String cameraId, UniFiProtectNvrThingConfig config,
+    public UniFiProtectHighFpsModeRequest(HttpClient httpClient, String cameraId, UniFiProtectBridgeConfig config,
             String token, boolean enable) {
         super(httpClient, config);
         setPath(API_CAMERAS.concat(cameraId));

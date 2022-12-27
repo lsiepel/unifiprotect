@@ -36,7 +36,7 @@ import org.eclipse.jetty.http.HttpURI;
 import org.eclipse.jetty.http.MimeTypes;
 import org.openhab.binding.unifiprotect.internal.model.UniFiProtectStatus;
 import org.openhab.binding.unifiprotect.internal.model.UniFiProtectStatus.SendStatus;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -93,7 +93,7 @@ public abstract class UniFiProtectRequest {
     @Nullable
     private String jsonRaw;
 
-    public UniFiProtectRequest(HttpClient httpClient, UniFiProtectNvrThingConfig config) {
+    public UniFiProtectRequest(HttpClient httpClient, UniFiProtectBridgeConfig config) {
         this.httpClient = httpClient;
         this.setHost(config.getHost());
     }

@@ -27,7 +27,7 @@ import org.openhab.binding.unifiprotect.internal.event.UniFiProtectEventManager;
 import org.openhab.binding.unifiprotect.internal.model.UniFiProtectCameraCache;
 import org.openhab.binding.unifiprotect.internal.model.UniFiProtectNvr;
 import org.openhab.binding.unifiprotect.internal.model.json.UniFiProtectEvent;
-import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectNvrThingConfig;
+import org.openhab.binding.unifiprotect.internal.thing.UniFiProtectBridgeConfig;
 import org.openhab.binding.unifiprotect.internal.types.UniFiProtectCamera;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +46,7 @@ public class UniFiProtectRequestTester {
     private String user = "";
     private String host = "";
     private String password = "";
-    private UniFiProtectNvrThingConfig config = new UniFiProtectNvrThingConfig();
+    private UniFiProtectBridgeConfig config = new UniFiProtectBridgeConfig();
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -57,7 +57,7 @@ public class UniFiProtectRequestTester {
         user = properties.getProperty("user");
         password = properties.getProperty("password");
         host = properties.getProperty("host");
-        config = new UniFiProtectNvrThingConfig();
+        config = new UniFiProtectBridgeConfig();
         config.setHost(host);
         config.setPassword(password);
         config.setUserName(user);
